@@ -1,0 +1,1104 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>海凪 レン / Kaito Ren — Official Site</title>
+<meta name="description" content="深海から来た、静かな歌声。VTuber・海凪レンの公式サイト。">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Noto+Sans+JP:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+/* ========== RESET & ROOT ========== */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --color-bg:        #020d1a;
+  --color-surface:   #061628;
+  --color-border:    rgba(0, 180, 255, 0.12);
+  --color-primary:   #00c8ff;
+  --color-accent:    #0077ff;
+  --color-glow:      rgba(0, 200, 255, 0.5);
+  --color-deep:      #001133;
+  --color-teal:      #00e5d4;
+  --color-text-main: rgba(220, 240, 255, 0.95);
+  --color-text-sub:  rgba(150, 200, 230, 0.75);
+  --color-text-muted:rgba(100, 150, 180, 0.5);
+  --gradient-hero:   radial-gradient(ellipse at 30% 60%, rgba(0,100,200,0.3) 0%, transparent 60%),
+                     radial-gradient(ellipse at 70% 30%, rgba(0,200,255,0.15) 0%, transparent 50%),
+                     radial-gradient(ellipse at 50% 100%, rgba(0,50,150,0.4) 0%, transparent 60%);
+  --gradient-card:   linear-gradient(135deg, rgba(0,100,200,0.1), rgba(0,200,255,0.05));
+  --gradient-accent: linear-gradient(135deg, #00c8ff, #0077ff, #00e5d4);
+  --font-display: 'Cinzel', serif;
+  --font-elegant: 'Cormorant Garamond', serif;
+  --font-body:    'Noto Sans JP', sans-serif;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--color-bg);
+  color: var(--color-text-main);
+  font-family: var(--font-body);
+  overflow-x: hidden;
+  line-height: 1.7;
+}
+
+/* ========== CANVAS ========== */
+#sand-canvas {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.4;
+}
+
+#bubbles-canvas {
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  pointer-events: none;
+}
+
+/* ========== NAV ========== */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  padding: 1.2rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(2, 13, 26, 0.7);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.nav-logo {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  letter-spacing: 3px;
+  background: var(--gradient-accent);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 0 10px var(--color-glow));
+}
+
+.nav-links {
+  display: flex;
+  gap: 2rem;
+  list-style: none;
+}
+
+.nav-links a {
+  color: var(--color-text-sub);
+  text-decoration: none;
+  font-size: 0.8rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  transition: color 0.3s ease;
+}
+.nav-links a:hover {
+  color: var(--color-primary);
+  text-shadow: 0 0 10px var(--color-glow);
+}
+
+/* ========== HERO ========== */
+#hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: var(--gradient-hero), var(--color-bg);
+}
+
+.hero-inner {
+  position: relative;
+  z-index: 10;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 4rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 6rem 2rem 4rem;
+  width: 100%;
+}
+
+.hero-text {
+  animation: fadeInLeft 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  opacity: 0;
+}
+
+.hero-label {
+  font-size: 0.7rem;
+  letter-spacing: 5px;
+  color: var(--color-primary);
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+.hero-label::before {
+  content: '';
+  display: block;
+  width: 30px;
+  height: 1px;
+  background: var(--color-primary);
+  box-shadow: 0 0 8px var(--color-glow);
+}
+
+.hero-name-ja {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 6vw, 5rem);
+  font-weight: 600;
+  line-height: 1.1;
+  background: var(--gradient-accent);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 0 30px var(--color-glow));
+  margin-bottom: 0.3rem;
+}
+
+.hero-name-en {
+  font-family: var(--font-elegant);
+  font-size: clamp(1rem, 2vw, 1.4rem);
+  font-style: italic;
+  color: var(--color-text-sub);
+  letter-spacing: 4px;
+  margin-bottom: 2rem;
+}
+
+.hero-divider {
+  width: 60px;
+  height: 1px;
+  background: linear-gradient(90deg, var(--color-primary), transparent);
+  margin-bottom: 1.5rem;
+  box-shadow: 0 0 10px var(--color-glow);
+}
+
+.hero-catchcopy {
+  font-family: var(--font-elegant);
+  font-size: clamp(1rem, 1.8vw, 1.25rem);
+  font-style: italic;
+  color: var(--color-text-sub);
+  line-height: 1.8;
+  margin-bottom: 2.5rem;
+}
+
+.hero-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 0.9rem 2rem;
+  border: 1px solid var(--color-primary);
+  color: var(--color-primary);
+  text-decoration: none;
+  font-size: 0.8rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  overflow: hidden;
+}
+.hero-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--color-primary);
+  transform: translateX(-100%);
+  transition: transform 0.3s ease;
+  z-index: -1;
+}
+.hero-btn:hover {
+  color: var(--color-bg);
+  box-shadow: 0 0 30px var(--color-glow);
+}
+.hero-btn:hover::before {
+  transform: translateX(0);
+}
+
+.hero-image-wrap {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  animation: fadeInRight 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.3s forwards;
+  opacity: 0;
+}
+
+.hero-char-placeholder {
+  width: 100%;
+  max-width: 480px;
+  aspect-ratio: 3/4;
+  border-radius: 2px;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+}
+
+.hero-char-placeholder img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+}
+
+.hero-char-placeholder::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, transparent 50%, rgba(2,13,26,0.8) 100%);
+}
+
+.char-frame {
+  position: absolute;
+  inset: -1px;
+  border: 1px solid rgba(0, 200, 255, 0.3);
+  box-shadow:
+    0 0 20px rgba(0, 200, 255, 0.2),
+    inset 0 0 20px rgba(0, 200, 255, 0.05);
+  pointer-events: none;
+}
+
+/* ========== SECTION BASE ========== */
+section {
+  position: relative;
+  z-index: 10;
+  padding: 8rem 2rem;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 5rem;
+}
+
+.section-label {
+  font-size: 0.7rem;
+  letter-spacing: 6px;
+  color: var(--color-primary);
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+  opacity: 0.8;
+}
+
+.section-title {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  background: var(--gradient-accent);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 0 20px var(--color-glow));
+  margin-bottom: 1rem;
+}
+
+.section-sub {
+  font-family: var(--font-elegant);
+  font-style: italic;
+  color: var(--color-text-sub);
+  font-size: 1rem;
+  letter-spacing: 2px;
+}
+
+.section-line {
+  width: 60px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--color-primary), transparent);
+  margin: 1.5rem auto 0;
+  box-shadow: 0 0 10px var(--color-glow);
+}
+
+/* ========== WAVE ========== */
+.wave-divider {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  height: 120px;
+  margin-top: -60px;
+  pointer-events: none;
+}
+
+#wave-canvas {
+  width: 100%;
+  height: 120px;
+  display: block;
+}
+
+/* ========== PROFILE ========== */
+#profile {
+  background:
+    radial-gradient(ellipse at 80% 50%, rgba(0,100,200,0.15) 0%, transparent 60%),
+    var(--color-bg);
+}
+
+.profile-inner {
+  max-width: 1000px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  gap: 4rem;
+  align-items: start;
+}
+
+.profile-visual {
+  position: sticky;
+  top: 6rem;
+}
+
+.profile-card {
+  background: rgba(0, 100, 200, 0.08);
+  backdrop-filter: blur(20px);
+  border: 1px solid var(--color-border);
+  border-radius: 2px;
+  padding: 2rem;
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(0, 200, 255, 0.1);
+}
+
+.profile-name {
+  font-family: var(--font-display);
+  font-size: 1.8rem;
+  background: var(--gradient-accent);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 0.3rem;
+}
+
+.profile-name-en {
+  font-family: var(--font-elegant);
+  font-style: italic;
+  color: var(--color-text-sub);
+  font-size: 1rem;
+  letter-spacing: 3px;
+  margin-bottom: 1.5rem;
+}
+
+.profile-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.8rem;
+  margin-top: 1.5rem;
+}
+
+.stat-item {
+  background: rgba(0, 200, 255, 0.05);
+  border: 1px solid var(--color-border);
+  padding: 0.8rem;
+  border-radius: 2px;
+}
+
+.stat-label {
+  font-size: 0.65rem;
+  letter-spacing: 2px;
+  color: var(--color-primary);
+  text-transform: uppercase;
+  margin-bottom: 0.3rem;
+  opacity: 0.8;
+}
+
+.stat-value {
+  font-size: 0.95rem;
+  color: var(--color-text-main);
+}
+
+.profile-content {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+
+.profile-block-title {
+  font-size: 0.7rem;
+  letter-spacing: 4px;
+  color: var(--color-primary);
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+.profile-block-title::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, var(--color-border), transparent);
+}
+
+.profile-text {
+  color: var(--color-text-sub);
+  line-height: 2;
+  font-size: 0.95rem;
+}
+
+.color-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.color-tag {
+  padding: 0.4rem 1rem;
+  border: 1px solid var(--color-border);
+  font-size: 0.75rem;
+  color: var(--color-text-sub);
+  letter-spacing: 1px;
+  background: rgba(0, 200, 255, 0.05);
+  transition: all 0.3s ease;
+}
+.color-tag:hover {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+  box-shadow: 0 0 10px rgba(0, 200, 255, 0.2);
+}
+
+/* ========== EPISODE ========== */
+#episode {
+  background:
+    radial-gradient(ellipse at 20% 50%, rgba(0,50,150,0.2) 0%, transparent 60%),
+    var(--color-bg);
+}
+
+.episode-inner {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.timeline {
+  position: relative;
+  padding-left: 3rem;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: linear-gradient(to bottom, transparent, var(--color-primary), transparent);
+  box-shadow: 0 0 8px var(--color-glow);
+}
+
+.timeline-item {
+  position: relative;
+  margin-bottom: 3rem;
+  opacity: 0;
+  transform: translateX(20px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.timeline-item.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+.timeline-item:nth-child(2) { transition-delay: 0.1s; }
+.timeline-item:nth-child(3) { transition-delay: 0.2s; }
+.timeline-item:nth-child(4) { transition-delay: 0.3s; }
+
+.timeline-dot {
+  position: absolute;
+  left: -3.35rem;
+  top: 0.3rem;
+  width: 12px;
+  height: 12px;
+  border: 1px solid var(--color-primary);
+  background: var(--color-bg);
+  box-shadow: 0 0 10px var(--color-glow);
+  transform: rotate(45deg);
+}
+
+.timeline-date {
+  font-size: 0.7rem;
+  letter-spacing: 3px;
+  color: var(--color-primary);
+  margin-bottom: 0.5rem;
+  opacity: 0.8;
+}
+
+.timeline-card {
+  background: rgba(0, 100, 200, 0.06);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--color-border);
+  padding: 1.5rem 2rem;
+  border-radius: 2px;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+.timeline-card:hover {
+  border-color: rgba(0, 200, 255, 0.3);
+  box-shadow: 0 4px 20px rgba(0, 200, 255, 0.1);
+}
+
+.timeline-title {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  color: var(--color-text-main);
+  margin-bottom: 0.8rem;
+  letter-spacing: 1px;
+}
+
+.timeline-desc {
+  font-size: 0.9rem;
+  color: var(--color-text-sub);
+  line-height: 1.8;
+}
+
+/* ========== FOOTER ========== */
+footer {
+  position: relative;
+  z-index: 10;
+  text-align: center;
+  padding: 3rem 2rem;
+  border-top: 1px solid var(--color-border);
+  background: rgba(2, 13, 26, 0.8);
+}
+
+.footer-logo {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  letter-spacing: 4px;
+  background: var(--gradient-accent);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 0.5rem;
+}
+
+.footer-copy {
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+  letter-spacing: 2px;
+}
+
+/* ========== ANIMATIONS ========== */
+@keyframes fadeInLeft {
+  from { opacity: 0; transform: translateX(-40px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes fadeInRight {
+  from { opacity: 0; transform: translateX(40px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.animate-on-scroll {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.animate-on-scroll.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ========== RESPONSIVE ========== */
+@media (max-width: 768px) {
+  nav { padding: 1rem; }
+  .nav-links { display: none; }
+
+  .hero-inner {
+    grid-template-columns: 1fr;
+    text-align: center;
+    gap: 3rem;
+    padding: 6rem 1.5rem 3rem;
+  }
+  .hero-label { justify-content: center; }
+  .hero-divider { margin: 0 auto 1.5rem; }
+
+  .profile-inner {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  .profile-visual { position: static; }
+
+  section { padding: 5rem 1.5rem; }
+  .timeline { padding-left: 2rem; }
+  .timeline-dot { left: -2.35rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+</style>
+</head>
+<body>
+
+<canvas id="sand-canvas"></canvas>
+<canvas id="bubbles-canvas"></canvas>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">KAITO REN</div>
+  <ul class="nav-links">
+    <li><a href="#hero">Home</a></li>
+    <li><a href="#profile">Profile</a></li>
+    <li><a href="#episode">Episode</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-inner">
+    <div class="hero-text">
+      <div class="hero-label">VTuber · Deep Sea Singer</div>
+      <h1 class="hero-name-ja">海凪 レン</h1>
+      <p class="hero-name-en">Kaito Ren</p>
+      <div class="hero-divider"></div>
+      <p class="hero-catchcopy">
+        深海の底で、<br>君の声を待っている。
+      </p>
+      <a href="#profile" class="hero-btn">
+        <span>Discover</span>
+        <span>→</span>
+      </a>
+    </div>
+    <div class="hero-image-wrap">
+      <div class="hero-char-placeholder">
+        <!-- キャラクター画像をここに配置 -->
+        <!-- <img src="images/kaito-ren.png" alt="海凪レン"> -->
+        <div style="width:100%;height:100%;background:linear-gradient(to bottom,#001133,#020d1a);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:1rem;">
+          <div style="font-family:'Cinzel',serif;font-size:1.5rem;background:linear-gradient(135deg,#00c8ff,#0077ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">海凪 レン</div>
+          <div style="font-size:0.75rem;color:rgba(0,200,255,0.5);letter-spacing:3px;">CHARACTER IMAGE</div>
+        </div>
+      </div>
+      <div class="char-frame"></div>
+    </div>
+  </div>
+</section>
+
+<!-- WAVE -->
+<div class="wave-divider">
+  <canvas id="wave-canvas"></canvas>
+</div>
+
+<!-- PROFILE -->
+<section id="profile">
+  <div class="section-header animate-on-scroll">
+    <p class="section-label">Character</p>
+    <h2 class="section-title">Profile</h2>
+    <p class="section-sub">深海から来た、静かな歌声</p>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="profile-inner">
+    <div class="profile-visual animate-on-scroll">
+      <div class="profile-card">
+        <div class="profile-name">海凪 レン</div>
+        <div class="profile-name-en">Kaito Ren</div>
+        <div class="profile-stats">
+          <div class="stat-item">
+            <div class="stat-label">Birthday</div>
+            <div class="stat-value">8月8日</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-label">Height</div>
+            <div class="stat-value">182 cm</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-label">Color</div>
+            <div class="stat-value">Deep Navy</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-label">Fan Name</div>
+            <div class="stat-value">波（なみ）</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="profile-content">
+      <div class="animate-on-scroll">
+        <div class="profile-block-title">About</div>
+        <p class="profile-text">
+          深海の静けさを宿した、ミステリアスな歌い手。<br>
+          普段は無口でクールだが、歌っているときだけ表情が変わる。<br>
+          ファンのことを「波」と呼び、静かな愛情で見守っている。<br>
+          深海の底から、君の声を待っている。
+        </p>
+      </div>
+
+      <div class="animate-on-scroll">
+        <div class="profile-block-title">World</div>
+        <p class="profile-text">
+          深海・珊瑚・波・月明かりの海——<br>
+          静寂の中に漂う光と影の世界。<br>
+          ダークブルー×シルバー×ティールで彩られた<br>
+          幻想的な海底世界が彼の故郷。
+        </p>
+      </div>
+
+      <div class="animate-on-scroll">
+        <div class="profile-block-title">Image Color</div>
+        <div class="color-tags">
+          <span class="color-tag">深海ネイビー</span>
+          <span class="color-tag">ダークブルー</span>
+          <span class="color-tag">ネオンアクア</span>
+          <span class="color-tag">シルバー</span>
+          <span class="color-tag">ティール</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EPISODE -->
+<section id="episode">
+  <div class="section-header animate-on-scroll">
+    <p class="section-label">History</p>
+    <h2 class="section-title">Episode</h2>
+    <p class="section-sub">深海に刻まれた記憶</p>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="episode-inner">
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-date">ORIGIN</div>
+        <div class="timeline-card">
+          <div class="timeline-title">深海との出会い</div>
+          <p class="timeline-desc">
+            幼い頃、嵐の夜に海辺で一人の少年は深海の歌声を聞いた。
+            その日から、彼は深海の歌を自分のものにするため
+            長い旅を始めた。
+          </p>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-date">CHAPTER 1</div>
+        <div class="timeline-card">
+          <div class="timeline-title">沈黙の修行</div>
+          <p class="timeline-desc">
+            深海の底で孤独な修行を重ねた数年間。
+            言葉を捨て、音だけで世界と対話する術を身につけた。
+            その沈黙が、彼の歌声に深みを与えた。
+          </p>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-date">CHAPTER 2</div>
+        <div class="timeline-card">
+          <div class="timeline-title">水面への帰還</div>
+          <p class="timeline-desc">
+            長い沈黙の後、ついに水面へと浮上した海凪レン。
+            深海で磨いた歌声を携え、「波」たちのもとへと
+            歌を届けるため、活動を開始した。
+          </p>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-date">NOW</div>
+        <div class="timeline-card">
+          <div class="timeline-title">深海からの歌声</div>
+          <p class="timeline-desc">
+            今もなお、深海の記憶を胸に歌い続ける海凪レン。
+            静かな夜に耳を澄ませば、深海から届く歌声が
+            あなたの心に響くかもしれない。
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">KAITO REN</div>
+  <p class="footer-copy">© 2026 Lupinus. All rights reserved.</p>
+</footer>
+
+<script>
+// ========== BUBBLE PARTICLES ==========
+const canvas = document.getElementById('bubbles-canvas');
+const ctx = canvas.getContext('2d');
+
+function resizeCanvas() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+resizeCanvas();
+window.addEventListener('resize', () => {
+  resizeCanvas();
+  bubbles.forEach(b => {
+    b.x = Math.random() * canvas.width;
+    b.y = Math.random() * canvas.height;
+  });
+});
+
+const bubbles = Array.from({ length: 25 }, () => ({
+  x: Math.random() * window.innerWidth,
+  y: Math.random() * window.innerHeight,
+  r: Math.random() * 12 + 4,
+  speed: Math.random() * 0.6 + 0.2,
+  opacity: Math.random() * 0.25 + 0.1,
+  drift: (Math.random() - 0.5) * 0.8,
+  wobble: Math.random() * Math.PI * 2,
+  wobbleSpeed: Math.random() * 0.02 + 0.01
+}));
+
+function animateBubbles() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  bubbles.forEach(b => {
+    b.y -= b.speed;
+    b.wobble += b.wobbleSpeed;
+    b.x += Math.sin(b.wobble) * 0.5 + b.drift * 0.1;
+
+    if (b.y < -30) {
+      b.y = canvas.height + 30;
+      b.x = Math.random() * canvas.width;
+    }
+
+    // 泡の外枠グロー
+    ctx.beginPath();
+    ctx.arc(b.x, b.y, b.r + 2, 0, Math.PI * 2);
+    ctx.strokeStyle = `rgba(0, 200, 255, ${b.opacity * 0.2})`;
+    ctx.lineWidth = 3;
+    ctx.stroke();
+
+    // 泡の輪郭（メイン）
+    ctx.beginPath();
+    ctx.arc(b.x, b.y, b.r, 0, Math.PI * 2);
+    ctx.strokeStyle = `rgba(100, 220, 255, ${b.opacity})`;
+    ctx.lineWidth = 1.5;
+    ctx.stroke();
+
+    // 泡の内側（半透明）
+    const grd = ctx.createRadialGradient(
+      b.x - b.r * 0.3, b.y - b.r * 0.3, 0,
+      b.x, b.y, b.r
+    );
+    grd.addColorStop(0, `rgba(150, 230, 255, ${b.opacity * 0.25})`);
+    grd.addColorStop(0.5, `rgba(0, 150, 255, ${b.opacity * 0.1})`);
+    grd.addColorStop(1, `rgba(0, 50, 150, ${b.opacity * 0.05})`);
+    ctx.beginPath();
+    ctx.arc(b.x, b.y, b.r, 0, Math.PI * 2);
+    ctx.fillStyle = grd;
+    ctx.fill();
+
+    // 光沢ハイライト
+    ctx.beginPath();
+    ctx.arc(b.x - b.r * 0.35, b.y - b.r * 0.35, b.r * 0.25, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(255, 255, 255, ${b.opacity * 0.8})`;
+    ctx.fill();
+
+    // 小さい光沢
+    ctx.beginPath();
+    ctx.arc(b.x + b.r * 0.3, b.y - b.r * 0.1, b.r * 0.1, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(255, 255, 255, ${b.opacity * 0.4})`;
+    ctx.fill();
+  });
+
+  requestAnimationFrame(animateBubbles);
+}
+
+// DOMContentLoaded後に開始
+document.addEventListener('DOMContentLoaded', () => {
+  animateBubbles();
+});
+
+// ========== SCROLL ANIMATION ==========
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(el => {
+    if (el.isIntersecting) {
+      el.target.classList.add('visible');
+      observer.unobserve(el.target);
+    }
+  });
+}, { threshold: 0.15 });
+
+document.querySelectorAll('.animate-on-scroll').forEach(el => observer.observe(el));
+
+// Timeline items
+const timelineObserver = new IntersectionObserver((entries) => {
+  entries.forEach(el => {
+    if (el.isIntersecting) {
+      el.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.2 });
+
+document.querySelectorAll('.timeline-item').forEach(el => timelineObserver.observe(el));
+</script>
+</body>
+</html>
+<script>
+// ========== WAVE ANIMATION ==========
+const waveCanvas = document.getElementById('wave-canvas');
+if (waveCanvas) {
+  const wctx = waveCanvas.getContext('2d');
+
+  function resizeWave() {
+    waveCanvas.width = window.innerWidth;
+    waveCanvas.height = 120;
+  }
+  resizeWave();
+  window.addEventListener('resize', resizeWave);
+
+  let waveTime = 0;
+
+  function drawWaves() {
+    wctx.clearRect(0, 0, waveCanvas.width, waveCanvas.height);
+
+    const waves = [
+      { amp: 4, freq: 0.008, speed: 0.015, opacity: 0.25, color: '0, 180, 255', offset: 0 },
+      { amp: 3, freq: 0.012, speed: 0.02, opacity: 0.15, color: '0, 120, 220', offset: 2 },
+      { amp: 2, freq: 0.018, speed: 0.025, opacity: 0.1, color: '0, 220, 255', offset: 4 },
+    ];
+
+    waves.forEach(w => {
+      wctx.beginPath();
+      wctx.moveTo(0, waveCanvas.height / 2);
+      for (let x = 0; x <= waveCanvas.width; x++) {
+        const y = waveCanvas.height / 2
+          + Math.sin(x * w.freq + waveTime * w.speed + w.offset) * w.amp
+          + Math.sin(x * w.freq * 0.5 + waveTime * w.speed * 0.7) * (w.amp * 0.5);
+        wctx.lineTo(x, y);
+      }
+      wctx.strokeStyle = `rgba(${w.color}, ${w.opacity})`;
+      wctx.lineWidth = 1.5;
+      wctx.shadowBlur = 8;
+      wctx.shadowColor = `rgba(${w.color}, 0.4)`;
+      wctx.stroke();
+      wctx.shadowBlur = 0;
+    });
+
+    waveTime++;
+    requestAnimationFrame(drawWaves);
+  }
+  drawWaves();
+}
+</script>
+<script>
+// ========== SAND / SEABED BACKGROUND ==========
+const sandCanvas = document.getElementById('sand-canvas');
+const sctx = sandCanvas.getContext('2d');
+
+function resizeSand() {
+  sandCanvas.width = window.innerWidth;
+  sandCanvas.height = window.innerHeight;
+  drawSand();
+}
+
+function drawSand() {
+  const w = sandCanvas.width;
+  const h = sandCanvas.height;
+  sctx.clearRect(0, 0, w, h);
+
+  // 深海グラデーション背景
+  const bgGrd = sctx.createLinearGradient(0, 0, 0, h);
+  bgGrd.addColorStop(0,   'rgba(0, 8, 30, 0)');
+  bgGrd.addColorStop(0.6, 'rgba(0, 20, 60, 0.3)');
+  bgGrd.addColorStop(1,   'rgba(0, 15, 40, 0.6)');
+  sctx.fillStyle = bgGrd;
+  sctx.fillRect(0, 0, w, h);
+
+  // 砂粒（細かい点）
+  for (let i = 0; i < 800; i++) {
+    const x = Math.random() * w;
+    const y = h * 0.6 + Math.random() * h * 0.4;
+    const r = Math.random() * 1.2 + 0.2;
+    const opacity = Math.random() * 0.15 + 0.03;
+
+    sctx.beginPath();
+    sctx.arc(x, y, r, 0, Math.PI * 2);
+    sctx.fillStyle = `rgba(100, 160, 200, ${opacity})`;
+    sctx.fill();
+  }
+
+  // 海底のなだらかな丘
+  sctx.beginPath();
+  sctx.moveTo(0, h);
+  for (let x = 0; x <= w; x += 2) {
+    const y = h * 0.82
+      + Math.sin(x * 0.003) * 30
+      + Math.sin(x * 0.007 + 1) * 15
+      + Math.sin(x * 0.012 + 2) * 8;
+    sctx.lineTo(x, y);
+  }
+  sctx.lineTo(w, h);
+  sctx.closePath();
+
+  const sandGrd = sctx.createLinearGradient(0, h * 0.8, 0, h);
+  sandGrd.addColorStop(0, 'rgba(20, 60, 120, 0.4)');
+  sandGrd.addColorStop(0.5, 'rgba(10, 40, 90, 0.5)');
+  sandGrd.addColorStop(1, 'rgba(5, 20, 60, 0.7)');
+  sctx.fillStyle = sandGrd;
+  sctx.fill();
+
+  // 海底ラインのグロー
+  sctx.beginPath();
+  sctx.moveTo(0, h * 0.82);
+  for (let x = 0; x <= w; x += 2) {
+    const y = h * 0.82
+      + Math.sin(x * 0.003) * 30
+      + Math.sin(x * 0.007 + 1) * 15
+      + Math.sin(x * 0.012 + 2) * 8;
+    sctx.lineTo(x, y);
+  }
+  sctx.strokeStyle = 'rgba(0, 180, 255, 0.15)';
+  sctx.lineWidth = 1.5;
+  sctx.shadowBlur = 12;
+  sctx.shadowColor = 'rgba(0, 180, 255, 0.3)';
+  sctx.stroke();
+  sctx.shadowBlur = 0;
+
+  // 珊瑚・海草のシルエット
+  const corals = [
+    { x: w * 0.05, type: 'coral' },
+    { x: w * 0.15, type: 'seaweed' },
+    { x: w * 0.28, type: 'coral' },
+    { x: w * 0.45, type: 'seaweed' },
+    { x: w * 0.6,  type: 'coral' },
+    { x: w * 0.75, type: 'seaweed' },
+    { x: w * 0.88, type: 'coral' },
+    { x: w * 0.95, type: 'seaweed' },
+  ];
+
+  corals.forEach(c => {
+    const baseY = h * 0.82
+      + Math.sin(c.x * 0.003) * 30
+      + Math.sin(c.x * 0.007 + 1) * 15;
+
+    if (c.type === 'coral') {
+      // 珊瑚のシルエット
+      sctx.beginPath();
+      sctx.moveTo(c.x, baseY);
+      sctx.lineTo(c.x, baseY - 40);
+      sctx.lineTo(c.x - 15, baseY - 60);
+      sctx.moveTo(c.x, baseY - 40);
+      sctx.lineTo(c.x + 15, baseY - 55);
+      sctx.moveTo(c.x, baseY - 25);
+      sctx.lineTo(c.x - 10, baseY - 40);
+      sctx.strokeStyle = 'rgba(0, 150, 220, 0.2)';
+      sctx.lineWidth = 2;
+      sctx.stroke();
+    } else {
+      // 海草のシルエット
+      sctx.beginPath();
+      for (let i = 0; i < 5; i++) {
+        const sy = baseY - i * 12;
+        const sx = c.x + Math.sin(i * 0.8) * 8;
+        if (i === 0) sctx.moveTo(sx, sy);
+        else sctx.lineTo(sx, sy);
+      }
+      sctx.strokeStyle = 'rgba(0, 180, 200, 0.15)';
+      sctx.lineWidth = 2;
+      sctx.stroke();
+    }
+  });
+}
+
+resizeSand();
+window.addEventListener('resize', resizeSand);
+</script>
